@@ -1,0 +1,48 @@
+.footer {
+    background-color: #FAFAFA;
+}
+
+.footer__title {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: center;
+    color: #A0A0A0;
+    margin: 0 70px 20px;
+    padding: 79px 0 20px;
+    border-bottom: 1px solid #E8E8E8;
+}
+
+.footer__container {
+    display: flex;
+    margin: 0 70px 0;
+    padding: 0 0 20px;
+    justify-content: space-between;
+}
+
+.footer__copyright {
+    margin: 0;
+}
+
+.footer__container-right {
+    display: flex;
+    gap: 20px;
+}
+
+.footer__company {
+    margin: 0;
+}
+
+.footer__github-link {
+    text-decoration: none;
+}
+
+.footer__text {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: right;
+    color: #000000;
+}

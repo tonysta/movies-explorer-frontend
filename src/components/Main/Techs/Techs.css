@@ -1,0 +1,48 @@
+.techs {
+    background-color: #F5F5F5;
+    margin: 0 0 110px;
+}
+
+.techs__title {
+    margin: 0 70px 90px;
+    padding: 100px 0 0;
+}
+
+.techs__big-title {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    color: #000000;
+    margin: 0 0 26px;
+}
+
+.techs__text {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    color: #000000;
+    margin: 0 0 100px;
+}
+
+.techs__techs-container {
+    list-style: none;
+    padding: 0 0 100px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.techs__item {
+    width: 90px;
+    height: 39px;
+    background-color: #E8E8E8;
+    border-radius: 10px;
+    text-align: center;
+    padding: 21px 0 0;
+}

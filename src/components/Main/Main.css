@@ -1,0 +1,10 @@
+.landing-title {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 27px;
+    letter-spacing: -0.04em;
+    color: #000000;
+    border-bottom: 1px solid black;
+    padding: 0 0 23px;
+}
