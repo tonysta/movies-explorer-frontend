@@ -29,7 +29,11 @@
 @import url(./components/Movies/MoviesCardList/MoviesCardList.css);
 
 @import url(./components/Movies/MoviesCard/MoviesCard.css);
-/* 
-* {
-    outline: 1px solid red;
+
+@import url(./components/Profile/Profile.css);
+
+@import url(./components/Register/Register.css);
+
+/* * {
+    outline: 1px solid green;
 } */
