@@ -30,3 +30,7 @@
 .movies-list__button-more:hover {
     opacity: 0.6;
 }
+
+.movies-list__button-more_type_hidden {
+    display: none;
+}

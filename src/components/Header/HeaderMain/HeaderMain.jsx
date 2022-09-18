@@ -6,11 +6,11 @@ function HeaderMain() {
     return (
         <div className='header-main__container'>
             <nav className='header-main__links-container'>
-                <Link to='#' className='header-main__link'>Фильмы</Link>
-                <Link to='#' className='header-main__link'>Сохраненные фильмы</Link>
+                <Link to='/movies' className='header-main__link'>Фильмы</Link>
+                <Link to='/saved-movies' className='header-main__link'>Сохраненные фильмы</Link>
             </nav>
             <div className='header-main__account-container'>
-                <Link to='#' className='header-main__account-link'>Аккаунт</Link>
+                <Link to='/profile' className='header-main__account-link'>Аккаунт</Link>
                 <div className='header-main__acc-icon'></div>
             </div>
         </div>
