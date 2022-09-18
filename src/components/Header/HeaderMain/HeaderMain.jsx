@@ -1,8 +1,20 @@
-{/* <div className='header__main-container'>
-                <Link to='/signup' className='header__link'>Фильмы</Link>
-                <Link to='/signin' className='header__link'>Сохраненные фильмы</Link>
-                <div className='header__account-container'>
-                    <Link to='/signin' className='header__link'>Аккаунт</Link>
-                    <div className='header__acc-icon'></div>
-                </div>
-            </div> */}
+import React from 'react';
+import { Link } from "react-router-dom";
+
+
+function HeaderMain() {
+    return (
+        <div className='header-main__container'>
+            <nav className='header-main__links-container'>
+                <Link to='#' className='header-main__link'>Фильмы</Link>
+                <Link to='#' className='header-main__link'>Сохраненные фильмы</Link>
+            </nav>
+            <div className='header-main__account-container'>
+                <Link to='#' className='header-main__account-link'>Аккаунт</Link>
+                <div className='header-main__acc-icon'></div>
+            </div>
+        </div>
+    )
+}
+
+export default HeaderMain;

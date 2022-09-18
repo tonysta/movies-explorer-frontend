@@ -1,0 +1,54 @@
+.card__img {
+    margin: 0 0 14px;
+}
+
+.card__title-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0 29px;
+    border-bottom: 1px solid #E8E8E8;
+    margin: 0 0 6px;
+}
+
+.card__title {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: #000000;
+    margin: 0;
+}
+.card__like {
+    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-image: url('../../../images/like.svg');
+}
+
+.card__like_type_active {
+    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-image: url('../../../images/like_active.svg');
+}
+
+.card__like_type_remove {
+    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-image: url('../../../images/like_remove.svg');
+}
+
+.card__duration {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    display: flex;
+    align-items: center;
+    color: #A0A0A0;
+}
+

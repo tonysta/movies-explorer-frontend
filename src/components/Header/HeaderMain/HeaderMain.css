@@ -1,0 +1,64 @@
+.header-main__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.header-main__links-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-main__link {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: right;
+    color: #000000;
+    text-decoration: none;
+    transition: opacity 0.3s linear;
+    cursor: pointer;
+  }
+  
+.header-main__link:hover {
+    opacity: 0.6;
+}
+
+.header-main__account-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 13px;
+}
+
+.header-main__account-link {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    text-decoration: none;
+    transition: opacity 0.3s linear;
+    cursor: pointer;
+  }
+  
+.header-main__account-link:hover {
+    opacity: 0.6;
+}
+
+.header-main__acc-icon {
+    background-image: url('../../../images/acc_icon.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #F9F9F9;
+    border-radius: 6px;
+    width: 30px;
+    height: 30px;
+
+}
