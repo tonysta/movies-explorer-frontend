@@ -1,5 +1,12 @@
 .footer {
     background-color: #FAFAFA;
+    margin-top: auto;
+}
+
+@media screen and (max-width: 768px) {
+    .footer {
+        background-color: transparent;
+    }
 }
 
 .footer__title {
@@ -36,6 +43,16 @@
 
 .footer__github-link {
     text-decoration: none;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: right;
+    color: #000000;
+    transition: opacity 0.3s linear;
+}
+.footer__github-link:hover {
+    opacity: 0.6;
 }
 
 .footer__text {

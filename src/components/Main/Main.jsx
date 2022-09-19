@@ -12,7 +12,7 @@ import Footer from '../Footer/Footer';
 
 function Main() {
     return (
-        <main>
+        <>
             <Header>
               <HeaderLanding />  
             </Header>
@@ -24,7 +24,7 @@ function Main() {
             <AboutMe />
             <Portfolio />
             <Footer />
-        </main>
+        </>
     )
 }
 

@@ -64,6 +64,11 @@
     line-height: 17px;
     text-align: center;
     color: #FFFFFF;
+    cursor: pointer;
+    transition: opacity 0.3s linear;
+}
+.auth__submit:hover {
+    opacity: 0.6;
 }
 
 .auth__login-link-container {
@@ -88,4 +93,8 @@
     line-height: 17px;
     text-align: center;
     color: #2BE080;
+    transition: opacity 0.3s linear;
+}
+.auth__login-link:hover {
+    opacity: 0.6;
 }

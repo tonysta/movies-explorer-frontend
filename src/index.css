@@ -38,6 +38,8 @@
 
 @import url(./components/PageNotFound/PageNotFound.css);
 
+@import url(./components/SavedMovies/SavedMovies.css);
+
 /* * {
     outline: 1px solid green;
 } */

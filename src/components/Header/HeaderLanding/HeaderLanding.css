@@ -16,7 +16,22 @@
     color: #000000;
     border-radius: 3px;
     text-decoration: none;
+    transition: opacity 0.3s linear;
 }
+.header-landing__login-button:hover {
+    opacity: 0.6;
+}
+
 .header-landing__register-link {
     text-decoration: none;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: right;
+    color: #000000;
+    transition: opacity 0.3s linear;
+}
+.header-landing__register-link:hover {
+    opacity: 0.6;
 }

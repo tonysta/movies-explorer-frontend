@@ -26,7 +26,12 @@
     display: flex;
     text-decoration: none;
     justify-content: space-between;
+    transition: opacity 0.3s linear;
 }
+.portfolio__link:hover {
+    opacity: 0.6;
+}
+
 .portfolio__desc {
     font-style: normal;
     font-weight: 400;

@@ -16,4 +16,8 @@
     background-color: #E8E8E8;
     border-radius: 10px;
     padding: 10px 17px;
+    transition: opacity 0.3s linear;
+}
+.navtab__link:hover {
+    opacity: 0.6;
 }

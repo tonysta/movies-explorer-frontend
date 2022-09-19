@@ -8,9 +8,10 @@
 
 .about-me__container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     gap: 270px;
 }
+
 .about-me__name {
     font-style: normal;
     font-weight: 400;
@@ -50,9 +51,21 @@
     font-size: 14px;
     line-height: 17px;
     color: #000000;
+    text-decoration: none;
+    transition: opacity 0.3s linear;
 }
+.about-me__github-profile-link:hover {
+    opacity: 0.6;
+}
+
 .about-me__photo {
     border-radius: 10px;
     width: 270px;
     height: 327px;
+}
+
+@media screen and (max-width: 768px) {
+    .about-me__container {
+        gap: 50px;
+    }
 }
