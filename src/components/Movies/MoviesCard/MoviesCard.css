@@ -1,11 +1,13 @@
 .card__img {
     margin: 0 0 14px;
     object-fit: cover;
-    max-width: 270px;
+    min-width: 270px;
+    box-sizing: content-box;
+    width: 100%;
 }
 @media screen and (max-width: 768px) {
     .card__img {
-        max-width: 339px;
+        max-width: 330px;
     }
 }
 

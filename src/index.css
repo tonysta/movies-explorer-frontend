@@ -40,6 +40,8 @@
 
 @import url(./components/SavedMovies/SavedMovies.css);
 
-/* * {
+@import url(./components/Header/HeaderBurger/HeaderBurger.css);
+
+* {
     outline: 1px solid green;
-} */
+}
