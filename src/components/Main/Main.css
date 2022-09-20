@@ -8,3 +8,10 @@
     border-bottom: 1px solid black;
     padding: 0 0 23px;
 }
+@media screen and (max-width: 320px) {
+    .landing-title {
+        font-size: 18px;
+        line-height: 22px;
+        padding: 0 0 28px;
+    }
+}

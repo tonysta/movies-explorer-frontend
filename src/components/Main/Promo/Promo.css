@@ -14,3 +14,14 @@
     color: #000000;
     padding: 160px 235px 151px;
 }
+
+@media screen and (max-width: 320px) {
+    .promo__title {
+        font-size: 29px;
+        line-height: 37px;
+        padding: 220px 0 212px;
+    }
+    .promo__container {
+        margin: 0 14px 70px;
+    }
+}

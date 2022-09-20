@@ -65,7 +65,36 @@
 }
 
 @media screen and (max-width: 768px) {
+    .about-me {
+        margin: 0 14px 70px;
+    }
     .about-me__container {
         gap: 50px;
+    }
+    .about-me__title {
+        margin: 0 0 60px;
+    }
+    .about-me__container {
+        flex-direction: column-reverse;
+        gap: 40px;
+    }
+    .about-me__photo {
+        width: auto;
+        height: auto;
+    }
+    .about-me__name {
+        font-size: 30px;
+        line-height: 36px;
+        margin: 0 0 20px;
+    }
+    .about-me__short-desc {
+        font-size: 11px;
+        line-height: 16px;
+        margin: 0 0 20px;
+    }
+    .about-me__full-desc {
+        font-size: 11px;
+        line-height: 16px;
+        margin: 0 0 40px;
     }
 }

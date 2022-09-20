@@ -46,3 +46,36 @@
     text-align: center;
     padding: 21px 0 0;
 }
+
+@media screen and (max-width: 320px) {
+    .techs {
+        margin: 0 18px 140px;
+        background-color: transparent;
+    }
+    .techs__title {
+        padding: 100px 0 28px;
+        margin: 0 0 60px;
+    }
+    .techs__big-title {
+        font-size: 30px;
+        line-height: 36px;
+    }
+    .techs__text {
+        font-size: 11px;
+        line-height: 16px;
+        margin: 0 0 50px;
+    }
+    .techs__techs-container {
+        margin: 0 53px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-items: center;
+
+    }
+    .techs__item {
+        font-size: 12px;
+        line-height: 15px;
+        width: 84px;
+        padding: 21px 0 0;
+    }
+}

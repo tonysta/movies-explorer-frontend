@@ -35,3 +35,15 @@
 .header-landing__register-link:hover {
     opacity: 0.6;
 }
+
+@media screen and (max-width: 320px) {
+    .header-landing__register-link {
+        font-size: 10px;
+    }
+    .header-landing__login-button {
+        font-size: 10px;
+    }
+    .header-landing__container {
+        gap: 14px;
+    }
+}
