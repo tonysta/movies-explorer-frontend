@@ -60,6 +60,11 @@
     opacity: 0.6;
 }
 
-.header-burger__account-container {
-
+@media screen and (max-width: 320px) {
+    .header-burger__wrapper_type_active {
+        width: 320px;
+    }
+    .header-burger__center-links {
+        flex-direction: column;
+    }
 }

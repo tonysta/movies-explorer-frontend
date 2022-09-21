@@ -5,15 +5,11 @@
     box-sizing: content-box;
     width: 100%;
 }
-@media screen and (max-width: 768px) {
-    .card__img {
-        max-width: 330px;
-    }
-}
 
 .card__title-container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 0 0 29px;
     border-bottom: 1px solid #E8E8E8;
     margin: 0 0 6px;
@@ -76,3 +72,14 @@
     color: #A0A0A0;
 }
 
+@media screen and (max-width: 768px) {
+    .card__img {
+        max-width: 330px;
+    }
+}
+@media screen and (max-width: 320px) {
+    .card__title {
+        font-size: 12px;
+        line-height: 15px;
+    }
+}

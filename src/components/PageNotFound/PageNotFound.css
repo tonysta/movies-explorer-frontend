@@ -44,3 +44,19 @@
 .page-not-found__back-button:hover {
     opacity: 0.6;
 }
+
+@media screen and (max-width: 320px) {
+    .page-not-found__container {
+        margin-bottom: 30px;
+    }
+    .page-not-found__title {
+        font-size: 80px;
+        line-height: 97px;
+        margin: 329px auto 10px;
+    }
+    .page-not-found__desc {
+        font-size: 12px;
+        line-height: 15px;
+        margin: 0 auto 284px;
+    }
+}
