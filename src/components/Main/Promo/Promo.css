@@ -15,7 +15,7 @@
     padding: 160px 235px 151px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 520px) {
     .promo__title {
         font-size: 29px;
         line-height: 37px;

@@ -46,7 +46,7 @@ function Register() {
                             />
                     </label>
                     <span className='auth__error'>Что-то пошло не так...</span>
-                    <button className='auth__submit' type='submit'>Зарегистрироваться</button>
+                    <button className='auth__submit' type='button'>Зарегистрироваться</button>
                     <div className='auth__login-link-container'>
                         <p className='auth__login-link-desc'>Уже зарегистрированы?</p>
                         <Link to='/signin' className='auth__login-link'>Войти</Link>

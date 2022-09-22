@@ -33,7 +33,7 @@ function Login() {
                             required
                             />
                     </label>
-                    <button className='auth__submit login__submit' type='submit'>Войти</button>
+                    <button className='auth__submit login__submit' type='button'>Войти</button>
                     <div className='auth__login-link-container'>
                         <p className='auth__login-link-desc'>Еще не зарегистрированы?</p>
                         <Link to='/signup' className='auth__login-link'>Регистрация</Link>

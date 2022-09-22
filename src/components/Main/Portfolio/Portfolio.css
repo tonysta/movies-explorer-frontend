@@ -50,7 +50,7 @@
     color: #000000;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 400px) {
     .portfolio {
         margin: 0 14px 50px;
     }

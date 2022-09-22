@@ -44,6 +44,7 @@
 
 .header-burger__center-links {
     display: flex;
+    flex-direction: column;
 }
 .header-burger__link {
     font-style: normal;
@@ -63,8 +64,5 @@
 @media screen and (max-width: 320px) {
     .header-burger__wrapper_type_active {
         width: 320px;
-    }
-    .header-burger__center-links {
-        flex-direction: column;
     }
 }

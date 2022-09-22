@@ -8,20 +8,20 @@ import Footer from '../Footer/Footer';
 
 function SavedMovies() {
     return (
-        <>
             <div className='saved-movies__wrapper'>
-            <Header>
-                <HeaderMain />
-            </Header>
-                <SearchForm />
-                <MoviesCardList type="savedCards">
-                    <MoviesCard type="savedCards" />
-                    <MoviesCard type="savedCards" />
-                    <MoviesCard type="savedCards" />
-                </MoviesCardList>
-            <Footer />
+                <Header>
+                    <HeaderMain />
+                </Header>
+                <main>
+                    <SearchForm />
+                    <MoviesCardList type="savedCards">
+                        <MoviesCard type="savedCards" />
+                        <MoviesCard type="savedCards" />
+                        <MoviesCard type="savedCards" />
+                    </MoviesCardList>
+                </main>
+                <Footer />
             </div>
-        </>
     )
 }
 

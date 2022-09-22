@@ -47,6 +47,15 @@
     padding: 21px 0 0;
 }
 
+@media screen and (max-width: 440px) {
+    .techs__techs-container {
+        margin: 0 53px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-items: center;
+    }
+}
+
 @media screen and (max-width: 320px) {
     .techs {
         margin: 0 18px 140px;
@@ -65,13 +74,7 @@
         line-height: 16px;
         margin: 0 0 50px;
     }
-    .techs__techs-container {
-        margin: 0 53px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        justify-items: center;
 
-    }
     .techs__item {
         font-size: 12px;
         line-height: 15px;

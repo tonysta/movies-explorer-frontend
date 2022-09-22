@@ -16,13 +16,15 @@ function Main() {
             <Header>
               <HeaderLanding />  
             </Header>
-            <Promo>
-                <NavTab />
-            </Promo>
-            <AboutProject />
-            <Techs />
-            <AboutMe />
-            <Portfolio />
+            <main>
+                <Promo>
+                    <NavTab />
+                </Promo>
+                <AboutProject />
+                <Techs />
+                <AboutMe />
+                <Portfolio />
+            </main>    
             <Footer />
         </>
     )

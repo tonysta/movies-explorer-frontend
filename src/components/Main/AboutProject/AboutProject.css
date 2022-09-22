@@ -67,6 +67,13 @@
     top: 20px;
 }
 
+@media screen and (max-width: 440px) {
+    .about-project__description-container {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
 @media screen and (max-width: 320px) {
     .about-project {
         margin: 0 18px 63px;
@@ -74,10 +81,7 @@
     .about-project__title {
         margin: 0 0 60px;
     }
-    .about-project__description-container {
-        flex-direction: column;
-        gap: 0;
-    }
+    
     .about-project__description-title {
         font-size: 18px;
         line-height: 22px;

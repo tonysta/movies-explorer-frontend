@@ -29,7 +29,6 @@
     align-items: center;
     gap: 12px;
     padding: 0 0 39px;
-    border-bottom: 1px solid #E8E8E8;
     margin: 0 0 10px;
 }
 
@@ -73,7 +72,7 @@
 .search__submit {
     border-radius: 5px;
     border: none;
-    width: 44px;
+    min-width: 44px;
     height: 44px;
     background-image: url('../../../images/find-button.svg');
     cursor: pointer;
@@ -89,7 +88,7 @@
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 400px) {
     .search {
         margin: 0 14px 0;
     }
@@ -99,6 +98,5 @@
     }
     .search__checkbox-container {
         padding: 0 0 39px 72px;
-        border: none;
     }
 }
