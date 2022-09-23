@@ -1,0 +1,103 @@
+.about-project {
+    margin: 0 70px 110px;
+}
+.about-project__title {
+    margin: 0 0 70px;
+}
+
+.about-project__description-container {
+    display: flex;
+    gap: 40px;
+}
+
+.about-project__description-title {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -0.04em;
+    color: #000000;
+    margin: 0 0 26px;
+}
+
+.about-project__description-text {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #000000;
+    margin: 0 0 110px;
+}
+
+.about-project__statusbar-container {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 141px;
+}
+
+.about-project__statusbar-item-1 {
+    flex-grow: 1;
+    background-color: #2BE080;
+    max-height: 36px;
+}
+.about-project__statusbar-item-2 {
+    flex-grow: 4;
+    background-color: #F2F2F2;
+    max-height: 36px;
+}
+
+.about-project__statusbar-text {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #000000;
+    padding: 9px 0 0;
+}
+
+.about-project__statusbar-desc {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #A0A0A0;
+    position: relative;
+    top: 20px;
+}
+
+@media screen and (max-width: 440px) {
+    .about-project__description-container {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .about-project {
+        margin: 0 18px 63px;
+    }
+    .about-project__title {
+        margin: 0 0 60px;
+    }
+    
+    .about-project__description-title {
+        font-size: 18px;
+        line-height: 22px;
+        margin: 0 0 16px;
+    }
+    .about-project__description-text {
+        font-size: 11px;
+        line-height: 16px;
+        margin: 0 0 56px;
+    }
+    .about-project__statusbar-text {
+        font-size: 11px;
+        line-height: 13px;
+    }
+    .about-project__statusbar-desc {
+        font-size: 11px;
+        line-height: 13px;
+    }
+}

@@ -1,0 +1,49 @@
+.header-landing__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.header-landing__login-button {
+    background-color: #2BE080;
+    text-align: center;
+    padding: 8px 20px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: #000000;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: opacity 0.3s linear;
+}
+.header-landing__login-button:hover {
+    opacity: 0.6;
+}
+
+.header-landing__register-link {
+    text-decoration: none;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: right;
+    color: #000000;
+    transition: opacity 0.3s linear;
+}
+.header-landing__register-link:hover {
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 320px) {
+    .header-landing__register-link {
+        font-size: 10px;
+    }
+    .header-landing__login-button {
+        font-size: 10px;
+    }
+    .header-landing__container {
+        gap: 14px;
+    }
+}
