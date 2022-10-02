@@ -6,7 +6,8 @@ import SearchForm from '../Movies/SearchForm/SearchForm';
 import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 import MoviesCard from '../Movies/MoviesCard/MoviesCard';
 
-function Movies() {
+function Movies( {movies} ) {
+
     return (
         <>
             <Header>
@@ -15,22 +16,11 @@ function Movies() {
             <main>
                 <SearchForm />
                 <MoviesCardList>
-                    <MoviesCard/>
-                    <MoviesCard/>
-                    <MoviesCard/>
-                    <MoviesCard/>
-                    <MoviesCard/>
-                    <MoviesCard/>
-                    <MoviesCard/>
-                    <MoviesCard/>
-                    <MoviesCard/>
-                    <MoviesCard/>
-                    <MoviesCard/>
-                    <MoviesCard/>
-                    <MoviesCard/>
-                    <MoviesCard/>
-                    <MoviesCard/>
-                    <MoviesCard/>
+                    {   
+                        movies.map((movie) => (
+                            <MoviesCard movie={movie} key={movie.id} />
+                        ))
+                    }
                 </MoviesCardList>
             </main>
             <Footer />

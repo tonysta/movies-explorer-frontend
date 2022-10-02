@@ -14,14 +14,14 @@ function SearchForm() {
                     minLength="2"
                     maxLength="40" />
                     <div className="search__checkbox-container">
-                    <label className="search__checkbox-label">
-                        <input type="checkbox" className="search__checkbox-hidden"/>
-                        <span className="search__checkbox"></span>
-                    </label>
-                    <p className="search__checkbox-desc">Короткометражки</p>
+                        <label className="search__checkbox-label">
+                            <input type="checkbox" className="search__checkbox-hidden"/>
+                            <span className="search__checkbox"></span>
+                        </label>
+                        <p className="search__checkbox-desc">Короткометражки</p>
                     </div>
                 </div>
-                <button type="submit" className="search__submit"></button>
+                <button type="button" className="search__submit"></button>
             </form>
         </section>
     )

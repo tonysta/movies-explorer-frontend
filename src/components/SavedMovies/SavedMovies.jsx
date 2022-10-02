@@ -16,8 +16,6 @@ function SavedMovies() {
                     <SearchForm />
                     <MoviesCardList type="savedCards">
                         <MoviesCard type="savedCards" />
-                        <MoviesCard type="savedCards" />
-                        <MoviesCard type="savedCards" />
                     </MoviesCardList>
                 </main>
                 <Footer />
