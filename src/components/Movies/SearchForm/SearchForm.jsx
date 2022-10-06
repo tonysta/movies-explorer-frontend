@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-function SearchForm({onSearch, setErrMsg}) {
+function SearchForm({onSearch, setErrMsg, onSavedSearch, type}) {
 
     const [name, setName] = useState('');
     const [checkbox, setCheckbox] = useState(false);
@@ -14,8 +14,12 @@ function SearchForm({onSearch, setErrMsg}) {
 
     function handleSearch(event) {
         event.preventDefault();
-        onSearch(name, checkbox);
-        setErrMsg(false);
+        if (type === 'savedMovies') {
+            onSavedSearch(name, checkbox);
+        } else {
+            onSearch(name, checkbox);
+            setErrMsg(false);
+        }
     }
 
     return(

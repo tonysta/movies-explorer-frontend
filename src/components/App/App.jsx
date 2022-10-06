@@ -1,4 +1,5 @@
 //1. следить за состоянием лайка при добавлении / удалении фильма
+//2. 
 
 
 import React, { useState, useEffect } from 'react';
@@ -53,7 +54,6 @@ function App() {
     }
   }
 
-
   function handleLogin() {
     setLoggedIn(true)
   }
@@ -79,8 +79,6 @@ function App() {
     }
   }, [loggedIn]);
 
- 
-
   function handleAddSavedMovie(movie) {
     mainApi.addSavedMovie(movie).then((newSavedMovie) => {
       setSavedMovies([newSavedMovie, ...savedMovies]);
@@ -105,7 +103,7 @@ function App() {
           }/>
           <Route path="/saved-movies" element={
             <ProtectedRoute loggedIn={loggedIn}>
-              <SavedMovies savedMovies={savedMovies} onDelete={handleDeleteSavedMovie}/>
+              <SavedMovies savedMovies={savedMovies} onDelete={handleDeleteSavedMovie} setSavedMovies={setSavedMovies}/>
             </ProtectedRoute>
           }/>
           <Route path="/profile" element={
