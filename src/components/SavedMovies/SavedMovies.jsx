@@ -6,7 +6,7 @@ import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 import MoviesCard from '../Movies/MoviesCard/MoviesCard';
 import Footer from '../Footer/Footer';
 
-function SavedMovies({savedMovies}) {
+function SavedMovies({savedMovies, onDelete}) {
     
     return (
             <div className='saved-movies__wrapper'>
@@ -18,7 +18,7 @@ function SavedMovies({savedMovies}) {
                     <MoviesCardList type="savedMovies">
                     {   
                         savedMovies.map((movie) => (
-                            <MoviesCard movie={movie} key={movie._id} type='savedMovies'/>
+                            <MoviesCard movie={movie} key={movie._id} type='savedMovies' onDelete={onDelete}/>
                         ))
                     }
                     </MoviesCardList>

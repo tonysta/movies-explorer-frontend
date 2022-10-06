@@ -1,10 +1,14 @@
 import React from "react";
 
-function MoviesCard({type, movie, onLike}) {
+function MoviesCard({type, movie, onLike, onDelete}) {
     const url = 'https://api.nomoreparties.co/';
 
     const handleLikeButton = () => {
-        onLike(movie);
+        if (type === "savedMovies") {
+            onDelete(movie)
+        } else {
+            onLike(movie);
+        }
     };
 
     return(

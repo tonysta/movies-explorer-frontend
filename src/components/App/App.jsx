@@ -1,3 +1,6 @@
+//1. следить за состоянием лайка при добавлении / удалении фильма
+
+
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { mainApi } from '../../utils/MainApi';
@@ -78,11 +81,17 @@ function App() {
 
  
 
-  function handleAddSavedMovie(savedMovie) {
-    mainApi.addSavedMovie(savedMovie).then((newSavedMovie) => {
+  function handleAddSavedMovie(movie) {
+    mainApi.addSavedMovie(movie).then((newSavedMovie) => {
       setSavedMovies([newSavedMovie, ...savedMovies]);
     }).catch((err) => { console.log(err) });
   };
+
+  function handleDeleteSavedMovie(savedMovie) {
+    mainApi.deleteSavedMovie(savedMovie._id).then(() => {
+      setSavedMovies((state) => state.filter((item) => item._id !== savedMovie._id));
+    }).catch((err) => { console.log(err) });
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -96,7 +105,7 @@ function App() {
           }/>
           <Route path="/saved-movies" element={
             <ProtectedRoute loggedIn={loggedIn}>
-              <SavedMovies savedMovies={savedMovies}/>
+              <SavedMovies savedMovies={savedMovies} onDelete={handleDeleteSavedMovie}/>
             </ProtectedRoute>
           }/>
           <Route path="/profile" element={

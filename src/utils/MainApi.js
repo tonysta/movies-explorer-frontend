@@ -60,6 +60,14 @@ class MainApi {
             return this.handleError(res);
         })
     }
+    deleteSavedMovie(movieId) {
+        return fetch(`${this._url}movies/${movieId}`, {
+            method: 'DELETE',
+            headers: this._headers
+        }).then((res) => {
+            return this.handleError(res);
+        })
+    }
     handleError(res) {
         if (res.ok) {
             return res.json();
