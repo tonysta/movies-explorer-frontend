@@ -1,9 +1,26 @@
-import React from "react";
+import React, {useState} from "react";
 
-function SearchForm() {
+function SearchForm({onSearch, setErrMsg}) {
+
+    const [name, setName] = useState('');
+    const [checkbox, setCheckbox] = useState(false);
+
+    function handleNameChange(event) {
+        setName(event.target.value);
+    }
+    function handleCheckboxChange() {
+        setCheckbox(!checkbox);
+    }
+
+    function handleSearch(event) {
+        event.preventDefault();
+        onSearch(name, checkbox);
+        setErrMsg(false);
+    }
+
     return(
         <section className="search">
-            <form name="search-movie" className="search__form">
+            <form name="search-movie" className="search__form" onSubmit={handleSearch}>
                 <div className="search__container">
                     <input 
                     type="text"
@@ -12,16 +29,19 @@ function SearchForm() {
                     className="search__input-film"
                     required
                     minLength="2"
-                    maxLength="40" />
+                    maxLength="40"
+                    value={name || ''}
+                    onChange={handleNameChange}
+                    />
                     <div className="search__checkbox-container">
                         <label className="search__checkbox-label">
-                            <input type="checkbox" className="search__checkbox-hidden"/>
+                            <input type="checkbox" className="search__checkbox-hidden" value={checkbox} onChange={handleCheckboxChange} />
                             <span className="search__checkbox"></span>
                         </label>
                         <p className="search__checkbox-desc">Короткометражки</p>
                     </div>
                 </div>
-                <button type="button" className="search__submit"></button>
+                <button type="submit" className="search__submit"></button>
             </form>
         </section>
     )

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { moviesApi } from '../../utils/MoviesApi';
 import { mainApi } from '../../utils/MainApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from "../ProtectedRoute";
@@ -16,8 +15,8 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
-  const [movies, setMovies] = useState([]);
-  // const [filteredMovies, setFilteredMovies] = useState([]);
+
+  const [savedMovies, setSavedMovies] = useState([]);
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
@@ -69,15 +68,21 @@ function App() {
     setUserData(null);
   }
 
-  // function handleSearchMovies(moviesList) {};
-
   useEffect(function () {
     if (loggedIn) {
-      moviesApi.getMovies().then((movies) => {
-        setMovies(movies);
+      mainApi.getSavedMovies().then((savedMovies) => {
+        setSavedMovies(savedMovies);
       }).catch((err) => { console.log(err) });
     }
   }, [loggedIn]);
+
+ 
+
+  function handleAddSavedMovie(savedMovie) {
+    mainApi.addSavedMovie(savedMovie).then((newSavedMovie) => {
+      setSavedMovies([newSavedMovie, ...savedMovies]);
+    }).catch((err) => { console.log(err) });
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -86,12 +91,12 @@ function App() {
           <Route path="/" element={<Main loggedIn={loggedIn}/>}/>
           <Route path="/movies" element={
             <ProtectedRoute loggedIn={loggedIn}>
-              <Movies movies={movies} />
+              <Movies loggedIn={loggedIn} onLike={handleAddSavedMovie} />
             </ProtectedRoute>
           }/>
           <Route path="/saved-movies" element={
             <ProtectedRoute loggedIn={loggedIn}>
-              <SavedMovies />
+              <SavedMovies savedMovies={savedMovies}/>
             </ProtectedRoute>
           }/>
           <Route path="/profile" element={

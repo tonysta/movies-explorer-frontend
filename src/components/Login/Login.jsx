@@ -33,7 +33,6 @@ function Login({ handleLogin, setData }) {
                 }
 
             }).catch((err) => console.log(err));
-
     }
 
     return (

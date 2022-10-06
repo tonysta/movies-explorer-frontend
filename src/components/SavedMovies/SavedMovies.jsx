@@ -6,7 +6,8 @@ import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 import MoviesCard from '../Movies/MoviesCard/MoviesCard';
 import Footer from '../Footer/Footer';
 
-function SavedMovies() {
+function SavedMovies({savedMovies}) {
+    
     return (
             <div className='saved-movies__wrapper'>
                 <Header>
@@ -14,8 +15,12 @@ function SavedMovies() {
                 </Header>
                 <main>
                     <SearchForm />
-                    <MoviesCardList type="savedCards">
-                        <MoviesCard type="savedCards" />
+                    <MoviesCardList type="savedMovies">
+                    {   
+                        savedMovies.map((movie) => (
+                            <MoviesCard movie={movie} key={movie._id} type='savedMovies'/>
+                        ))
+                    }
                     </MoviesCardList>
                 </main>
                 <Footer />

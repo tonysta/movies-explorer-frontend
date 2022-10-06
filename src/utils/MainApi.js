@@ -31,10 +31,31 @@ class MainApi {
             return this.handleError(res);
         })
     }
-    getMovies() {
-        return fetch(`${this._url}beatfilm-movies`, {
+    getSavedMovies() {
+        return fetch(`${this._url}movies`, {
             method: 'GET',
             headers: this._headers
+        }).then((res) => {
+            return this.handleError(res);
+        })
+    }
+    addSavedMovie(data) {
+        return fetch(`${this._url}movies`, {
+            method: 'POST',
+            headers: this.getAuthHeaders(),
+            body: JSON.stringify({
+                country: data.country,
+                director: data.director,
+                duration: data.duration,
+                year: data.year,
+                description: data.description,
+                image: `https://api.nomoreparties.co${data.image.url}`,
+                trailerLink: data.trailerLink,
+                thumbnail: `https://api.nomoreparties.co${data.image.formats.thumbnail.url}`,
+                movieId: data.id,
+                nameRU: data.nameRU,
+                nameEN: data.nameEN,
+            })
         }).then((res) => {
             return this.handleError(res);
         })
