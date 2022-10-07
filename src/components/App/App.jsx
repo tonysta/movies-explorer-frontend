@@ -1,5 +1,6 @@
 //1. следить за состоянием лайка при добавлении / удалении фильма
-//2. 
+//2. ничего не найдено - при первой загрузке
+//3. 
 
 
 import React, { useState, useEffect } from 'react';
@@ -103,7 +104,7 @@ function App() {
           }/>
           <Route path="/saved-movies" element={
             <ProtectedRoute loggedIn={loggedIn}>
-              <SavedMovies savedMovies={savedMovies} onDelete={handleDeleteSavedMovie} setSavedMovies={setSavedMovies}/>
+              <SavedMovies savedMovies={savedMovies} onDelete={handleDeleteSavedMovie}/>
             </ProtectedRoute>
           }/>
           <Route path="/profile" element={
