@@ -8,11 +8,12 @@ import MoviesCard from '../Movies/MoviesCard/MoviesCard';
 import { moviesApi } from '../../utils/MoviesApi';
 import Preloader from '../Preloader/Preloader';
 
-function Movies( { loggedIn, onLike } ) {
+function Movies( { loggedIn, onLike, likedMoviesIds } ) {
 
     const [movies, setMovies] = useState([]);
     const [preloader, setPreloader] = useState(false);
     const [errMsg, setErrMsg] = useState(false);
+    const [hasLoaded, sethasLoaded] = useState(false);
 
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [visibleMovies, setVisibleMovies] = useState(0);
@@ -74,6 +75,7 @@ function Movies( { loggedIn, onLike } ) {
                 }
                 setPreloader(false);
                 setMovies(filteredMovies);
+                sethasLoaded(true);
             }).catch((err) => {
                 setPreloader(false);
                 setErrMsg(true);
@@ -91,10 +93,10 @@ function Movies( { loggedIn, onLike } ) {
                 <SearchForm onSearch={handleSearchMovie} setErrMsg={setErrMsg}/>
                     { preloader ? 
                         <Preloader /> : 
-                        <MoviesCardList errMsg={errMsg} movies={movies} onAddMovies={handleAddVisibleMovies}>
+                        <MoviesCardList errMsg={errMsg} movies={movies} onAddMovies={handleAddVisibleMovies} hasLoaded={hasLoaded}>
                             {  
                                 movies.slice(0, visibleMovies).map((movie) => (
-                                    <MoviesCard movie={movie} key={movie.id} onLike={onLike} />
+                                    <MoviesCard movie={movie} key={movie.id} onLike={onLike} isLiked={likedMoviesIds.includes(movie.id)}/>
                                 ))
                             }
                         </MoviesCardList>

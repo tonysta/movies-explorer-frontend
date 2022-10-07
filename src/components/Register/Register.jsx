@@ -44,7 +44,7 @@ function Register() {
             <section className='auth'>
                 <img src={logo} alt='логотип' className='auth__logo header__logo'/>
                 <h1 className='auth__title'>Добро пожаловать!</h1>
-                <form className='auth__form' name='register' onSubmit={handleSubmit}>
+                <form className='auth__form' name='register' onSubmit={handleSubmit} noValidate >
                     <label className='auth__input-container'>
                         <span className='auth__input-label'>Имя</span>
                         <input

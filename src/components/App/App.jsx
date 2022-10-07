@@ -1,8 +1,3 @@
-//1. следить за состоянием лайка при добавлении / удалении фильма
-//2. ничего не найдено - при первой загрузке
-//3. 
-
-
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { mainApi } from '../../utils/MainApi';
@@ -22,6 +17,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
 
   const [savedMovies, setSavedMovies] = useState([]);
+  const [likedMoviesIds, setLikedMoviesIds] = useState([]);
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
@@ -76,6 +72,7 @@ function App() {
     if (loggedIn) {
       mainApi.getSavedMovies().then((savedMovies) => {
         setSavedMovies(savedMovies);
+        setLikedMoviesIds(savedMovies.map((item) => item.movieId));
       }).catch((err) => { console.log(err) });
     }
   }, [loggedIn]);
@@ -99,7 +96,7 @@ function App() {
           <Route path="/" element={<Main loggedIn={loggedIn}/>}/>
           <Route path="/movies" element={
             <ProtectedRoute loggedIn={loggedIn}>
-              <Movies loggedIn={loggedIn} onLike={handleAddSavedMovie} />
+              <Movies loggedIn={loggedIn} onLike={handleAddSavedMovie} likedMoviesIds={likedMoviesIds}/>
             </ProtectedRoute>
           }/>
           <Route path="/saved-movies" element={
