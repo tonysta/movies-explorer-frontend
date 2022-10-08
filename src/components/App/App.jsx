@@ -15,6 +15,8 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
+  const [profileErrMsg, setProfileErrMsg] = useState('');
+  const [success, setSuccess] = useState(false);
 
   const [savedMovies, setSavedMovies] = useState([]);
   const [likedMoviesIds, setLikedMoviesIds] = useState([]);
@@ -60,7 +62,16 @@ function App() {
   function handleUpdateUser(data) {
     mainApi.patchProfile(data).then((res) => {
       setCurrentUser(res);
-    }).catch((err) => { console.log(err) });
+      setSuccess(true);
+    })
+      .catch((err) => {
+        if (err === 409) {
+          setProfileErrMsg('Пользователь с таким email уже существует.')
+        } else {
+          setProfileErrMsg('При обновлении профиля произошла ошибка.')
+        }
+        console.log(err);
+    });
   }
   function handleSignOut() {
     localStorage.removeItem('token');
@@ -106,7 +117,7 @@ function App() {
           }/>
           <Route path="/profile" element={
             <ProtectedRoute loggedIn={loggedIn}>
-              <Profile onUpdateUser={handleUpdateUser} handleSignOut={handleSignOut} />
+              <Profile onUpdateUser={handleUpdateUser} handleSignOut={handleSignOut} profileErrMsg={profileErrMsg} setProfileErrMsg={setProfileErrMsg} success={success} />
             </ProtectedRoute>
           }/>
           

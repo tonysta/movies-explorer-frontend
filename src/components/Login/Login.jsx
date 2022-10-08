@@ -1,38 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 import { Link } from 'react-router-dom';
 import { login } from '../../utils/Auth';
+import { useFormWithValidation } from '../../utils/validation';
 
 function Login({ handleLogin, setData }) {
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
+    const [errMsg, setErrMsg] = useState('');
+
     const navigate = useNavigate();
-
-    function handleEmailChange(e) {
-        setEmail(e.target.value);
-    }
-
-    function handlePasswordChange(e) {
-        setPassword(e.target.value);
-    }
+    const validate = useFormWithValidation();
+    const { email, password } = validate.errors;
 
     function handleSubmit(event) {
         event.preventDefault();
+        const { email, password } = validate.values;
         login(email, password)
             .then((data) => {
                 if(data.token) {
                     localStorage.setItem('token', data.token);
                     setData({email});
                     handleLogin();
-                    navigate("/");
-                    setEmail('');
-                    setPassword('');
+                    validate.resetForm();
+                    navigate("/movies");
                 } else {
                     console.log(data.message);
                 }
-
-            }).catch((err) => console.log(err));
+            }).catch((err) => {
+            if (err === 401) {
+                setErrMsg('Вы ввели неправильный логин или пароль.')
+            } else {
+                setErrMsg('При авторизации произошла ошибка.')
+            }
+            console.log(err);
+        });
     }
 
     return (
@@ -40,7 +41,7 @@ function Login({ handleLogin, setData }) {
             <section className='auth'>
                 <img src={logo} alt='логотип' className='auth__logo header__logo'/>
                 <h1 className='auth__title'>Рады видеть!</h1>
-                <form className='auth__form' name='login' onSubmit={handleSubmit}>
+                <form className='auth__form' name='login' onSubmit={handleSubmit} noValidate>
                     <label className='auth__input-container'>
                         <span className='auth__input-label'>E-mail</span>
                         <input
@@ -51,9 +52,11 @@ function Login({ handleLogin, setData }) {
                             minLength='2'
                             maxLength='30'
                             required
-                            onChange={handleEmailChange}
-                            value={email}
+                            pattern='^(\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+[,;]?[ ]?)+$'
+                            onChange={validate.handleChange}
+                            value={validate.values.email || ''}
                             />
+                            <span className='auth__input-error'>{email}</span>
                     </label>
                     <label className='auth__input-container'>
                         <span className='auth__input-label'>Пароль</span>
@@ -65,11 +68,13 @@ function Login({ handleLogin, setData }) {
                             minLength='2'
                             maxLength='30'
                             required
-                            onChange={handlePasswordChange}
-                            value={password}
+                            onChange={validate.handleChange}
+                            value={validate.values.password || ''}
                             />
+                            <span className='auth__input-error'>{password}</span>
                     </label>
-                    <button className='auth__submit login__submit' type='submit'>Войти</button>
+                    <span className='auth__error'>{errMsg}</span>
+                    <button className={validate.isValid === true ? 'auth__submit login__submit' : 'login__submit auth__submit_type_disabled'} type='submit' disabled={validate.isValid === false}>Войти</button>
                     <div className='auth__login-link-container'>
                         <p className='auth__login-link-desc'>Еще не зарегистрированы?</p>
                         <Link to='/signup' className='auth__login-link'>Регистрация</Link>

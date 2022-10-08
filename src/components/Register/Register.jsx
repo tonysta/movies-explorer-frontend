@@ -21,7 +21,6 @@ function Register() {
         ).then(() => {
                 validate.resetForm();
         }).catch((err) => {
-
             if (err === 409) {
                 setErrMsg('Пользователь с таким email уже существует.')
             } else {
