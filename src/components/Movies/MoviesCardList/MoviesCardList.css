@@ -67,7 +67,7 @@
 }
 
 @media screen and (max-width: 1300px) {
-    .movies-list-container {
+    .movies-list__container {
         grid-template-columns: 1fr 1fr 1fr;
         column-gap: 30px;
     }
@@ -79,7 +79,7 @@
         margin: 0 30px 0;
     }
 
-    .movies-list-container {
+    .movies-list__container {
         grid-template-columns: 1fr 1fr;
         column-gap: 30px;
     }
@@ -89,7 +89,7 @@
     .movies-list {
         margin: 0 10px 0;
     }
-    .movies-list-container {
+    .movies-list__container {
         grid-template-columns: 1fr;
         column-gap: 0;
         padding: 50px 0 0;

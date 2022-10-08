@@ -55,6 +55,9 @@ function Movies( { loggedIn, onLike, likedMoviesIds } ) {
         ) {
             setVisibleMovies(visibleMovies_12);
             setAddMovies(addVisibleMovies_4);
+        } else {
+            setVisibleMovies(visibleMovies_12);
+            setAddMovies(addVisibleMovies_4);
         }
 
         window.addEventListener('resize', handleChangeWidth);
@@ -71,7 +74,7 @@ function Movies( { loggedIn, onLike, likedMoviesIds } ) {
                 let filteredMovies = allMovies
                     .filter((item) => item.nameRU.toLowerCase().includes(name.toLowerCase()))
                 if (checkbox) {
-                    filteredMovies = filteredMovies.filter((item) => (item.duration % 40) === 0)
+                    filteredMovies = filteredMovies.filter((item) => (item.duration <= 40))
                 }
                 setPreloader(false);
                 setMovies(filteredMovies);

@@ -1,41 +1,34 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from '../../images/logo.svg';
 import { register } from '../../utils/Auth';
 import { Link } from 'react-router-dom';
+import { useFormWithValidation } from '../../utils/validation';
 
 function Register() {
-    const [name, setName] = React.useState('');
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const [success, setSuccess] = React.useState(true);
 
-    function handleNameChange(event) {
-        setName(event.target.value);
-    }
-    function handleEmailChange(event) {
-        setEmail(event.target.value);
-    }
-    function handlePasswordChange(event) {
-        setPassword(event.target.value);
-    }
+    const [errMsg, setErrMsg] = useState('');
+
+    const validate = useFormWithValidation();
+    const { name, email, password } = validate.errors;
 
     function handleSubmit(event) {
         event.preventDefault();
+        const { name, email, password } = validate.values;
         register(
             name,
             email,
             password
-        ).then((res) => {
-                setSuccess(true);
-        }).catch((err) =>{
-            setSuccess(false);
-            console.log(err)
+        ).then(() => {
+                validate.resetForm();
+        }).catch((err) => {
+
+            if (err === 409) {
+                setErrMsg('Пользователь с таким email уже существует.')
+            } else {
+                setErrMsg('При регистрации пользователя произошла ошибка.')
+            }
+            console.log(err);
         })
-            .finally((res) =>{
-                setName('');
-                setEmail('');
-                setPassword('');
-            });
     }
 
     return (
@@ -55,9 +48,11 @@ function Register() {
                             minLength='2'
                             maxLength='30'
                             required
-                            value={name || ''}
-                            onChange={handleNameChange}
+                            pattern='[A-Za-zА-Яа-яЁё]+'
+                            value={validate.values.name || ''}
+                            onChange={validate.handleChange}
                             />
+                        <span className='auth__input-error'>{name}</span>
                     </label>
                     <label className='auth__input-container'>
                         <span className='auth__input-label'>E-mail</span>
@@ -69,9 +64,11 @@ function Register() {
                             minLength='2'
                             maxLength='30'
                             required
-                            value={email || ''}
-                            onChange={handleEmailChange}
+                            pattern='^(\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+[,;]?[ ]?)+$'
+                            value={validate.values.email || ''}
+                            onChange={validate.handleChange}
                             />
+                            <span className='auth__input-error'>{email}</span>
                     </label>
                     <label className='auth__input-container'>
                         <span className='auth__input-label'>Пароль</span>
@@ -83,12 +80,13 @@ function Register() {
                             minLength='2'
                             maxLength='30'
                             required
-                            value={password || ''}
-                            onChange={handlePasswordChange}
+                            value={validate.values.password || ''}
+                            onChange={validate.handleChange}
                             />
+                            <span className='auth__input-error'>{password}</span>
                     </label>
-                    <span className='auth__error'>{success ? '' : 'Что-то пошло не так...' }</span>
-                    <button className='auth__submit' type='submit'>Зарегистрироваться</button>
+                    <span className='auth__error'>{errMsg}</span>
+                    <button className={validate.isValid === true ? 'auth__submit' : 'auth__submit_type_disabled'} type='submit' disabled={validate.isValid === false} >Зарегистрироваться</button>
                     <div className='auth__login-link-container'>
                         <p className='auth__login-link-desc'>Уже зарегистрированы?</p>
                         <Link to='/signin' className='auth__login-link'>Войти</Link>
