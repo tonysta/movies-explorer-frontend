@@ -3,3 +3,6 @@
 
 # ссылка на PR:
 - https://github.com/tonysta/movies-explorer-frontend/pull/2
+
+# Фронтенд
+- movie.nomorepartiesxyz.ru
