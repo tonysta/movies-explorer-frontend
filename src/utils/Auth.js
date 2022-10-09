@@ -1,5 +1,5 @@
 // const BASE_URL = 'http://localhost:3000';
-const BASE_URL = 'https://api.movie.nomorepartiesxyz.ru/';
+const BASE_URL = 'https://api.movie.nomorepartiesxyz.ru';
 
 export const register = (name, email, password) => {
     return fetch(`${BASE_URL}/signup`, {
