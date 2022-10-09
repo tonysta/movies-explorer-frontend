@@ -6,7 +6,7 @@ import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 import MoviesCard from '../Movies/MoviesCard/MoviesCard';
 import Footer from '../Footer/Footer';
 
-function SavedMovies({savedMovies, onDelete}) {
+function SavedMovies({savedMovies, onDelete, setName, setCheckbox, name, checkbox, filterMovies}) {
 
     const [filteredMovies, setFilteredMovies] = useState([])
 
@@ -14,7 +14,7 @@ function SavedMovies({savedMovies, onDelete}) {
             let movies = savedMovies
                 .filter((item) => item.nameRU.toLowerCase().includes(name.toLowerCase()))
             if (checkbox) {
-                movies = filteredMovies.filter((item) => (item.duration % 40) === 0)
+                movies = filteredMovies.filter((item) => (item.duration <= 40))
             }
             setFilteredMovies(movies);
         }
@@ -25,7 +25,7 @@ function SavedMovies({savedMovies, onDelete}) {
                     <HeaderMain />
                 </Header>
                 <main>
-                    <SearchForm onSavedSearch={handleSearchSavedMovie} type='savedMovies'/>
+                    <SearchForm onSavedSearch={handleSearchSavedMovie} type='savedMovies' setName={setName} setCheckbox={setCheckbox} name={name} checkbox={checkbox} filterMovies={filterMovies}/>
                     <MoviesCardList type="savedMovies">
                         {
                             filteredMovies.length !== 0 ?

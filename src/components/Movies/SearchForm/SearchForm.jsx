@@ -1,15 +1,13 @@
-import React, {useState} from "react";
+import React from "react";
 
-function SearchForm({onSearch, setErrMsg, onSavedSearch, type}) {
-
-    const [name, setName] = useState('');
-    const [checkbox, setCheckbox] = useState(false);
+function SearchForm({onSearch, setErrMsg, onSavedSearch, type, filterMovies, name, setName, checkbox, setCheckbox, movies}) {
 
     function handleNameChange(event) {
         setName(event.target.value);
     }
-    function handleCheckboxChange() {
-        setCheckbox(!checkbox);
+    function handleCheckboxChange(checkbox) {
+        setCheckbox(checkbox.target.checked);
+        localStorage.setItem('checkbox', checkbox.target.checked);
     }
 
     function handleSearch(event) {
@@ -39,7 +37,7 @@ function SearchForm({onSearch, setErrMsg, onSavedSearch, type}) {
                     />
                     <div className="search__checkbox-container">
                         <label className="search__checkbox-label">
-                            <input type="checkbox" className="search__checkbox-hidden" value={checkbox} onChange={handleCheckboxChange} />
+                            <input type="checkbox" className="search__checkbox-hidden" value={checkbox} onChange={handleCheckboxChange}/>
                             <span className="search__checkbox"></span>
                         </label>
                         <p className="search__checkbox-desc">Короткометражки</p>

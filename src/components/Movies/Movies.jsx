@@ -5,15 +5,9 @@ import HeaderMain from '../Header/HeaderMain/HeaderMain';
 import SearchForm from '../Movies/SearchForm/SearchForm';
 import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 import MoviesCard from '../Movies/MoviesCard/MoviesCard';
-import { moviesApi } from '../../utils/MoviesApi';
 import Preloader from '../Preloader/Preloader';
 
-function Movies( { loggedIn, onLike, likedMoviesIds } ) {
-
-    const [movies, setMovies] = useState([]);
-    const [preloader, setPreloader] = useState(false);
-    const [errMsg, setErrMsg] = useState(false);
-    const [hasLoaded, sethasLoaded] = useState(false);
+function Movies( { onLike, likedMoviesIds, handleSearchMovie, movies, preloader, hasLoaded, errMsg, setErrMsg, filterMovies, name, setName, checkbox, setCheckbox } ) {
 
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [visibleMovies, setVisibleMovies] = useState(0);
@@ -34,7 +28,7 @@ function Movies( { loggedIn, onLike, likedMoviesIds } ) {
     const handleAddVisibleMovies = () => {
         setVisibleMovies((movies) => movies + addMovies);
       };
-    
+
     useEffect(() => {
         const handleChangeWidth = () => {
             setScreenWidth(window.innerWidth);
@@ -66,26 +60,7 @@ function Movies( { loggedIn, onLike, likedMoviesIds } ) {
         };
     }, [screenWidth]);
 
-    function handleSearchMovie(name, checkbox) {
-        if (loggedIn) {
-            setPreloader(true);
-            moviesApi.getMovies()
-            .then((allMovies) => {
-                let filteredMovies = allMovies
-                    .filter((item) => item.nameRU.toLowerCase().includes(name.toLowerCase()))
-                if (checkbox) {
-                    filteredMovies = filteredMovies.filter((item) => (item.duration <= 40))
-                }
-                setPreloader(false);
-                setMovies(filteredMovies);
-                sethasLoaded(true);
-            }).catch((err) => {
-                setPreloader(false);
-                setErrMsg(true);
-                console.log(err);
-            })
-        }
-    }
+   
 
     return (
         <div className='saved-movies__wrapper'>
@@ -93,11 +68,19 @@ function Movies( { loggedIn, onLike, likedMoviesIds } ) {
                 <HeaderMain />
             </Header>
             <main>
-                <SearchForm onSearch={handleSearchMovie} setErrMsg={setErrMsg}/>
+                <SearchForm 
+                onSearch={handleSearchMovie}
+                setErrMsg={setErrMsg} 
+                filterMovies={filterMovies}
+                movies={movies} 
+                name={name}
+                setName={setName}
+                checkbox={checkbox}
+                setCheckbox={setCheckbox}/>
                     { preloader ? 
                         <Preloader /> : 
-                        <MoviesCardList errMsg={errMsg} movies={movies} onAddMovies={handleAddVisibleMovies} hasLoaded={hasLoaded}>
-                            {  
+                        <MoviesCardList errMsg={errMsg} movies={movies} onAddMovies={handleAddVisibleMovies} hasLoaded={hasLoaded} visibleMovies={visibleMovies}>
+                            {
                                 movies.slice(0, visibleMovies).map((movie) => (
                                     <MoviesCard movie={movie} key={movie.id} onLike={onLike} isLiked={likedMoviesIds.includes(movie.id)}/>
                                 ))
