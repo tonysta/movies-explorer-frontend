@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import { mainApi } from '../../utils/MainApi';
+import { register, login } from '../../utils/Auth';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from "../ProtectedRoute";
 import { checkToken } from "../../utils/Auth";
@@ -102,12 +103,6 @@ function App() {
     }
   }
 
-  function handleLogin() {
-    setLoggedIn(true)
-  }
-  function handleUserData(data) {
-    setUserData(data);
-  }
   function handleUpdateUser(data) {
     mainApi.patchProfile(data).then((res) => {
       setCurrentUser(res);
@@ -123,6 +118,45 @@ function App() {
     });
   }
 
+  const onRegister = (name, email, password) => {
+    register(name, email, password)
+      .then((data) => {
+        if (data) {
+          onLogin(email, password);
+        }
+      })
+      .catch((err) => {
+        if (err === 409) {
+            setErrMsg('Пользователь с таким email уже существует.')
+        } else {
+            setErrMsg('При регистрации пользователя произошла ошибка.')
+        }
+        console.log(err);
+    })
+  };
+
+  const onLogin = (email, password) => {
+    login(email, password)
+      .then((data) => {
+        if(data.token) {
+            localStorage.setItem('token', data.token);
+            setUserData({email});
+            setLoggedIn(true)
+            navigate("/movies");
+        } else {
+            console.log(data.message);
+        }
+      })
+      .catch((err) => {
+        if (err === 401) {
+            setErrMsg('Вы ввели неправильный логин или пароль.')
+        } else {
+            setErrMsg('При авторизации произошла ошибка.')
+        }
+      console.log(err);
+  });
+  };
+
   function handleSignOut() {
     localStorage.clear();
     setLoggedIn(false);
@@ -133,6 +167,7 @@ function App() {
     setLikedMoviesIds([]);
     setName('');
     setCurrentUser({});
+    setErrMsg(false);
   }
 
   useEffect(function () {
@@ -197,8 +232,8 @@ function App() {
             </ProtectedRoute>
           }/>
           
-          <Route path="/signin" element={<Login  handleLogin={handleLogin} setData={handleUserData} />}/>
-          <Route path="/signup" element={<Register />}/>
+          <Route path="/signin" element={<Login onLogin={onLogin} errMsg={errMsg}/>}/>
+          <Route path="/signup" element={<Register onRegister={onRegister} errMsg={errMsg}/>}/>
           <Route path="*" element={<PageNotFound />}/>
         </Routes>
       </div>

@@ -1,39 +1,18 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import logo from '../../images/logo.svg';
 import { Link } from 'react-router-dom';
-import { login } from '../../utils/Auth';
 import { useFormWithValidation } from '../../utils/validation';
 
-function Login({ handleLogin, setData }) {
-    const [errMsg, setErrMsg] = useState('');
+function Login({ onLogin, errMsg}) {
 
-    const navigate = useNavigate();
     const validate = useFormWithValidation();
     const { email, password } = validate.errors;
 
     function handleSubmit(event) {
         event.preventDefault();
         const { email, password } = validate.values;
-        login(email, password)
-            .then((data) => {
-                if(data.token) {
-                    localStorage.setItem('token', data.token);
-                    setData({email});
-                    handleLogin();
-                    validate.resetForm();
-                    navigate("/movies");
-                } else {
-                    console.log(data.message);
-                }
-            }).catch((err) => {
-            if (err === 401) {
-                setErrMsg('Вы ввели неправильный логин или пароль.')
-            } else {
-                setErrMsg('При авторизации произошла ошибка.')
-            }
-            console.log(err);
-        });
+        onLogin(email, password)
+        validate.resetForm();
     }
 
     return (
