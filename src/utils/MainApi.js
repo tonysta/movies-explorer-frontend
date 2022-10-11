@@ -77,8 +77,8 @@ class MainApi {
 }
 
 export const mainApi = new MainApi({
-    // url: 'http://localhost:3000/',
-    url: 'https://api.movie.nomorepartiesxyz.ru/',
+    url: 'http://localhost:3000/',
+    // url: 'https://api.movie.nomorepartiesxyz.ru/',
     headers: {
         'content-type': 'application/json',
     }

@@ -47,7 +47,7 @@ function Profile({onUpdateUser, handleSignOut, profileErrMsg, setProfileErrMsg, 
                                 minLength="2"
                                 maxLength="30"
                                 placeholder='Виталий'
-                                value={validate.values.name || ''}
+                                value={validate.values.name ?? currentUser.name}
                                 onChange={validate.handleChange}
                                 />
                         </label>
@@ -63,7 +63,7 @@ function Profile({onUpdateUser, handleSignOut, profileErrMsg, setProfileErrMsg, 
                                 pattern='^(\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+[,;]?[ ]?)+$'
                                 minLength="2"
                                 maxLength="30"
-                                value={validate.values.email || ''}
+                                value={validate.values.email || currentUser.email}
                                 onChange={validate.handleChange}
                                 />
                         </label>

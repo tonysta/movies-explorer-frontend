@@ -39,7 +39,9 @@ function Login({ handleLogin, setData }) {
     return (
         <main className='login'>
             <section className='auth'>
-                <img src={logo} alt='логотип' className='auth__logo header__logo'/>
+                <Link to="/">
+                    <img src={logo} alt='логотип' className='auth__logo header__logo'/>
+                </Link>
                 <h1 className='auth__title'>Рады видеть!</h1>
                 <form className='auth__form' name='login' onSubmit={handleSubmit} noValidate>
                     <label className='auth__input-container'>

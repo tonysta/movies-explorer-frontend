@@ -1,28 +1,10 @@
 import React from "react";
 
-function SearchForm({onSearch, setErrMsg, onSavedSearch, type, filterMovies, name, setName, checkbox, setCheckbox, movies}) {
-
-    function handleNameChange(event) {
-        setName(event.target.value);
-    }
-    function handleCheckboxChange(checkbox) {
-        setCheckbox(checkbox.target.checked);
-        localStorage.setItem('checkbox', checkbox.target.checked);
-    }
-
-    function handleSearch(event) {
-        event.preventDefault();
-        if (type === 'savedMovies') {
-            onSavedSearch(name, checkbox);
-        } else {
-            onSearch(name, checkbox);
-            setErrMsg(false);
-        }
-    }
+function SearchForm({ name,  checkbox, changeCheckbox, changeName, submitSearch}) {
 
     return(
         <section className="search">
-            <form name="search-movie" className="search__form" onSubmit={handleSearch}>
+            <form name="search-movie" className="search__form" onSubmit={submitSearch}>
                 <div className="search__container">
                     <input 
                     type="text"
@@ -30,14 +12,14 @@ function SearchForm({onSearch, setErrMsg, onSavedSearch, type, filterMovies, nam
                     placeholder="Фильм"
                     className="search__input-film"
                     required
-                    minLength="2"
+                    minLength="1"
                     maxLength="40"
-                    value={name || ''}
-                    onChange={handleNameChange}
+                    value={name}
+                    onChange={changeName}
                     />
                     <div className="search__checkbox-container">
                         <label className="search__checkbox-label">
-                            <input type="checkbox" className="search__checkbox-hidden" value={checkbox} onChange={handleCheckboxChange}/>
+                            <input type="checkbox" className="search__checkbox-hidden" checked={checkbox} onChange={changeCheckbox} />
                             <span className="search__checkbox"></span>
                         </label>
                         <p className="search__checkbox-desc">Короткометражки</p>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import { mainApi } from '../../utils/MainApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from "../ProtectedRoute";
@@ -13,20 +13,10 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import { moviesApi } from '../../utils/MoviesApi';
-
-function filterMovies(movies, name, checkbox) {
-  if (!movies) {
-    return [];
-  }
-  console.log(name, checkbox)
-  let filteredMovies = movies.filter((item) => item.nameRU.toLowerCase().includes(name.toLowerCase()))
-  if (checkbox) {
-      filteredMovies = filteredMovies.filter((item) => (item.duration <= 40))
-  }
-  return filteredMovies;
-}
+import { filterMovies } from '../../utils/filterMovies';
 
 function App() {
+  const location = useLocation();
   const [movies, setMovies] = useState([]);
 
   const [preloader, setPreloader] = useState(false);
@@ -47,38 +37,47 @@ function App() {
   const [userData, setUserData] = useState(null);
   let navigate = useNavigate();
 
-    function handleChangeCheckbox(checkbox) {
-      localStorage.setItem('checkbox', checkbox)
-      setCheckbox(checkbox);
-    }
-
-  function handleSearchMovie(name, checkbox) {
-        setPreloader(true);
-        moviesApi.getMovies()
-        .then((allMovies) => {
-            setPreloader(false);
-            setMovies(allMovies);
-            localStorage.setItem('lastSearch', JSON.stringify(allMovies));
-            localStorage.setItem('name', name);
-            localStorage.setItem('checkbox', checkbox);
-            sethasLoaded(true);
-        }).catch((err) => {
-            setPreloader(false);
-            localStorage.removeItem('lastSearch');
-            localStorage.removeItem('name');
-            localStorage.removeItem('checkbox');
-            setErrMsg(true);
-            console.log(err);
-        })
+  const handleChangeCheckbox = (event) => {
+    localStorage.setItem('checkbox', event.target.checked)
+    setCheckbox(event.target.checked);
   }
 
-  
+  const handleChangeName = (event) => {
+    setName(event.target.value);
+  }
+
+  const handleSearchMovieSubmit = (event) => {
+    event.preventDefault();
+    localStorage.setItem('name', name);
+    localStorage.setItem('checkbox', checkbox);
+    setPreloader(true);
+    moviesApi.getMovies()
+    .then((allMovies) => {
+        setPreloader(false);
+        setMovies(allMovies);
+        localStorage.setItem('lastSearch', JSON.stringify(allMovies));
+        sethasLoaded(true);
+    })
+    .catch((err) => {
+        setPreloader(false);
+        localStorage.removeItem('lastSearch');
+        localStorage.removeItem('name');
+        localStorage.removeItem('checkbox');
+        setErrMsg(true);
+        console.log(err);
+    })
+  }
 
   useEffect(function () {
     if (loggedIn) {
       mainApi.getProfileInfo().then((userInfo) => {
         setCurrentUser(userInfo);
       }).catch((err) => { console.log(err) });
+    }
+    if (JSON.parse(localStorage.getItem('lastSearch'))) {
+      setMovies(JSON.parse(localStorage.getItem('lastSearch')));
+      setCheckbox(JSON.parse(localStorage.getItem('checkbox')));
+      setName(localStorage.getItem('name'))
     }
   }, [loggedIn]);
 
@@ -96,8 +95,10 @@ function App() {
         };
         setUserData(userData);
         setLoggedIn(true);
-        navigate("/");
-      }).catch((err) => { console.log(err) });
+        navigate(location.pathname);
+      }).catch((err) => { 
+        handleSignOut();
+        console.log(err) });
     }
   }
 
@@ -121,10 +122,17 @@ function App() {
         console.log(err);
     });
   }
+
   function handleSignOut() {
-    localStorage.removeItem('token');
+    localStorage.clear();
     setLoggedIn(false);
     setUserData(null);
+    setMovies([]);
+    setSavedMovies([]);
+    setCheckbox(false);
+    setLikedMoviesIds([]);
+    setName('');
+    setCurrentUser({});
   }
 
   useEffect(function () {
@@ -134,20 +142,17 @@ function App() {
         setLikedMoviesIds(savedMovies.map((item) => item.movieId));
       }).catch((err) => { console.log(err) });
     }
-    
-    setMovies(JSON.parse(localStorage.getItem('lastSearch')))
-    setName(localStorage.getItem('name'))
-    setCheckbox(JSON.parse(localStorage.getItem('checkbox')))
-    
   }, [loggedIn]);
 
   function handleAddSavedMovie(movie) {
     mainApi.addSavedMovie(movie).then((newSavedMovie) => {
       setSavedMovies([newSavedMovie, ...savedMovies]);
+      setLikedMoviesIds([newSavedMovie.movieId, ...likedMoviesIds]);
     }).catch((err) => { console.log(err) });
   };
 
   function handleDeleteSavedMovie(savedMovie) {
+    console.log(savedMovie);
     mainApi.deleteSavedMovie(savedMovie._id).then(() => {
       setSavedMovies((state) => state.filter((item) => item._id !== savedMovie._id));
     }).catch((err) => { console.log(err) });
@@ -163,7 +168,7 @@ function App() {
               <Movies 
               onLike={handleAddSavedMovie} 
               likedMoviesIds={likedMoviesIds} 
-              handleSearchMovie={handleSearchMovie} 
+              submitSearch={handleSearchMovieSubmit} 
               movies={filterMovies(movies, name, checkbox)} 
               preloader={preloader} 
               hasLoaded={hasLoaded} 
@@ -171,9 +176,11 @@ function App() {
               setErrMsg={setErrMsg}
               filterMovies={filterMovies}
               name={name}
-              setName={setName}
+              changeName={handleChangeName}
               checkbox={checkbox}
-              setCheckbox={handleChangeCheckbox}/>
+              changeCheckbox={handleChangeCheckbox}
+              onDelete={handleDeleteSavedMovie}
+              />
             </ProtectedRoute>
           }/>
           <Route path="/saved-movies" element={
@@ -181,11 +188,7 @@ function App() {
               <SavedMovies
               savedMovies={savedMovies}
               onDelete={handleDeleteSavedMovie}
-              setName={setName}
-              setCheckbox={handleChangeCheckbox}
-              name={name}
-              checkbox={checkbox}
-              filterMovies={filterMovies}/>
+              />
             </ProtectedRoute>
           }/>
           <Route path="/profile" element={

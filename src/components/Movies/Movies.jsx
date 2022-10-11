@@ -6,24 +6,23 @@ import SearchForm from '../Movies/SearchForm/SearchForm';
 import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 import MoviesCard from '../Movies/MoviesCard/MoviesCard';
 import Preloader from '../Preloader/Preloader';
+import {
+    BREAKPOINT_1280, 
+    BREAKPOINT_768, 
+    BREAKPOINT_480, 
+    VISIBLE_MOVIES_12, 
+    VISIBLE_MOVIES_8, 
+    VISIBLE_MOVIES_5, 
+    ADD_VISIBLE_MOVIES_4, 
+    ADD_VISIBLE_MOVIES_2, 
+    ADD_VISIBLE_MOVIES_5, 
+} from '../../utils/constants';
 
-function Movies( { onLike, likedMoviesIds, handleSearchMovie, movies, preloader, hasLoaded, errMsg, setErrMsg, filterMovies, name, setName, checkbox, setCheckbox } ) {
+function Movies( { onLike, likedMoviesIds, submitSearch, movies, preloader, hasLoaded, errMsg, setErrMsg, filterMovies, name, changeName, checkbox, changeCheckbox, onDelete } ) {
 
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [visibleMovies, setVisibleMovies] = useState(0);
     const [addMovies, setAddMovies] = useState(0);
-
-    const breakpoint_1280 = 1280;
-    const breakpoint_768 = 768;
-    const breakpoint_480 = 480;
-
-    const visibleMovies_12 = 12;
-    const visibleMovies_8 = 8;
-    const visibleMovies_5 = 5;
-    
-    const addVisibleMovies_4 = 4;
-    const addVisibleMovies_2 = 2;
-    const addVisibleMovies_5 = 5;
 
     const handleAddVisibleMovies = () => {
         setVisibleMovies((movies) => movies + addMovies);
@@ -34,24 +33,24 @@ function Movies( { onLike, likedMoviesIds, handleSearchMovie, movies, preloader,
             setScreenWidth(window.innerWidth);
         };
 
-        if (screenWidth <= breakpoint_480) {
-            setVisibleMovies(visibleMovies_5);
-            setAddMovies(addVisibleMovies_5);
+        if (screenWidth <= BREAKPOINT_480) {
+            setVisibleMovies(VISIBLE_MOVIES_5);
+            setAddMovies(ADD_VISIBLE_MOVIES_5);
         } else if (
-            screenWidth <= breakpoint_768 &&
-            screenWidth > breakpoint_480
+            screenWidth <= BREAKPOINT_768 &&
+            screenWidth > BREAKPOINT_480
         ) {
-            setVisibleMovies(visibleMovies_8);
-            setAddMovies(addVisibleMovies_2);
+            setVisibleMovies(VISIBLE_MOVIES_8);
+            setAddMovies(ADD_VISIBLE_MOVIES_2);
         } else if (
-            screenWidth <= breakpoint_1280 &&
-            screenWidth > breakpoint_768
+            screenWidth <= BREAKPOINT_1280 &&
+            screenWidth > BREAKPOINT_768
         ) {
-            setVisibleMovies(visibleMovies_12);
-            setAddMovies(addVisibleMovies_4);
+            setVisibleMovies(VISIBLE_MOVIES_12);
+            setAddMovies(ADD_VISIBLE_MOVIES_4);
         } else {
-            setVisibleMovies(visibleMovies_12);
-            setAddMovies(addVisibleMovies_4);
+            setVisibleMovies(VISIBLE_MOVIES_12);
+            setAddMovies(ADD_VISIBLE_MOVIES_4);
         }
 
         window.addEventListener('resize', handleChangeWidth);
@@ -69,20 +68,20 @@ function Movies( { onLike, likedMoviesIds, handleSearchMovie, movies, preloader,
             </Header>
             <main>
                 <SearchForm 
-                onSearch={handleSearchMovie}
-                setErrMsg={setErrMsg} 
+                submitSearch={submitSearch}
+                setErrMsg={setErrMsg}
                 filterMovies={filterMovies}
                 movies={movies} 
                 name={name}
-                setName={setName}
+                changeName={changeName}
                 checkbox={checkbox}
-                setCheckbox={setCheckbox}/>
+                changeCheckbox={changeCheckbox}/>
                     { preloader ? 
                         <Preloader /> : 
                         <MoviesCardList errMsg={errMsg} movies={movies} onAddMovies={handleAddVisibleMovies} hasLoaded={hasLoaded} visibleMovies={visibleMovies}>
                             {
                                 movies.slice(0, visibleMovies).map((movie) => (
-                                    <MoviesCard movie={movie} key={movie.id} onLike={onLike} isLiked={likedMoviesIds.includes(movie.id)}/>
+                                    <MoviesCard movie={movie} key={movie.id} onLike={onLike} isLiked={likedMoviesIds.includes(movie.id)} onDelete={onDelete}/>
                                 ))
                             }
                         </MoviesCardList>

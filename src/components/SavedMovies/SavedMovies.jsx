@@ -5,19 +5,27 @@ import SearchForm from '../Movies/SearchForm/SearchForm';
 import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 import MoviesCard from '../Movies/MoviesCard/MoviesCard';
 import Footer from '../Footer/Footer';
+import { filterMovies } from '../../utils/filterMovies';
 
-function SavedMovies({savedMovies, onDelete, setName, setCheckbox, name, checkbox, filterMovies}) {
+function SavedMovies({savedMovies, onDelete}) {
 
-    const [filteredMovies, setFilteredMovies] = useState([])
+    const [ name, setName ] = useState('');
+    const [ checkbox, setCheckbox ] = useState(false);
 
-    function handleSearchSavedMovie(name, checkbox) {
-            let movies = savedMovies
-                .filter((item) => item.nameRU.toLowerCase().includes(name.toLowerCase()))
-            if (checkbox) {
-                movies = filteredMovies.filter((item) => (item.duration <= 40))
-            }
-            setFilteredMovies(movies);
-        }
+    const handleSearchSavedMovie = (event) => {
+        event.preventDefault();
+        setName(event.target.value);
+        setCheckbox(event.target.checked);
+    }
+    
+    const handleCheckboxChange = (event) => {
+        setCheckbox(event.target.checked);
+    }
+
+    const handleNameChange = (event) => {
+        const name = event.target.value;
+        setName(name);
+    }
 
     return (
             <div className='saved-movies__wrapper'>
@@ -25,16 +33,18 @@ function SavedMovies({savedMovies, onDelete, setName, setCheckbox, name, checkbo
                     <HeaderMain />
                 </Header>
                 <main>
-                    <SearchForm onSavedSearch={handleSearchSavedMovie} type='savedMovies' setName={setName} setCheckbox={setCheckbox} name={name} checkbox={checkbox} filterMovies={filterMovies}/>
+                    <SearchForm 
+                    name={name} 
+                    checkbox={checkbox} 
+                    changeCheckbox={handleCheckboxChange}
+                    changeName={handleNameChange}
+                    submitSearch={handleSearchSavedMovie}
+                    />
                     <MoviesCardList type="savedMovies">
                         {
-                            filteredMovies.length !== 0 ?
-                            filteredMovies.map((movie) => (
+                            filterMovies(savedMovies, name, checkbox).map((movie) => (
                                 <MoviesCard movie={movie} key={movie._id} type='savedMovies' onDelete={onDelete}/>
-                            )) :
-                            savedMovies.map((movie) => (
-                                <MoviesCard movie={movie} key={movie._id} type='savedMovies' onDelete={onDelete}/>
-                            ))       
+                            )) 
                         }
                     </MoviesCardList>
                 </main>

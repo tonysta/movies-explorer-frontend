@@ -4,8 +4,9 @@ function MoviesCard({type, movie, onLike, onDelete, isLiked}) {
     const url = 'https://api.nomoreparties.co/';
 
     const handleLikeButton = () => {
+        console.log(movie)
         if (isLiked) {
-            onDelete(movie)
+            onDelete(movie);
         } else {
             onLike(movie);
         }
@@ -17,7 +18,9 @@ function MoviesCard({type, movie, onLike, onDelete, isLiked}) {
 
     return(
         <article className="card">
+            <a href={movie.trailerLink} target='blank' rel="noreferrer">
             <img className="card__img" src={type === "savedMovies" ? `${movie.image}` : `${url}${movie.image.url}`} alt="название фильма" />
+            </a>
             <div className="card__title-container">
                 <h2 className="card__title">{movie.nameRU}</h2>
                 {
