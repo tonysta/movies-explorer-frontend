@@ -78,13 +78,18 @@ function App() {
     if (JSON.parse(localStorage.getItem('lastSearch'))) {
       setMovies(JSON.parse(localStorage.getItem('lastSearch')));
       setCheckbox(JSON.parse(localStorage.getItem('checkbox')));
-      setName(localStorage.getItem('name'))
+      setName(localStorage.getItem('name'));
     }
   }, [loggedIn]);
 
   useEffect(function () {
     tokenCheck();
   }, []);
+
+  useEffect(function () {
+    setSavedMovies(savedMovies);
+    setLikedMoviesIds(savedMovies.map((item) => item.movieId));
+  }, [savedMovies]);
 
   function tokenCheck() {
     const token = localStorage.getItem('token');
@@ -180,18 +185,29 @@ function App() {
   }, [loggedIn]);
 
   function handleAddSavedMovie(movie) {
-    mainApi.addSavedMovie(movie).then((newSavedMovie) => {
+    mainApi.addSavedMovie(movie)
+    .then((newSavedMovie) => {
       setSavedMovies([newSavedMovie, ...savedMovies]);
       setLikedMoviesIds([newSavedMovie.movieId, ...likedMoviesIds]);
-    }).catch((err) => { console.log(err) });
+    })
+    .catch((err) => { console.log(err) });
   };
 
-  function handleDeleteSavedMovie(savedMovie) {
-    console.log(savedMovie);
-    mainApi.deleteSavedMovie(savedMovie._id).then(() => {
-      setSavedMovies((state) => state.filter((item) => item._id !== savedMovie._id));
-    }).catch((err) => { console.log(err) });
-  }
+  const handleDeleteMovie = (movie) => {
+    const savedMovie = savedMovies.find(
+      (item) => item.movieId === movie.movieId || movie.id)
+
+    mainApi
+      .deleteSavedMovie(savedMovie._id)
+      .then(() => {
+        setSavedMovies(savedMovies.filter(
+          (item) => item._id !== savedMovie._id
+        ))
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -214,7 +230,7 @@ function App() {
               changeName={handleChangeName}
               checkbox={checkbox}
               changeCheckbox={handleChangeCheckbox}
-              onDelete={handleDeleteSavedMovie}
+              onDelete={handleDeleteMovie}
               />
             </ProtectedRoute>
           }/>
@@ -222,7 +238,7 @@ function App() {
             <ProtectedRoute loggedIn={loggedIn}>
               <SavedMovies
               savedMovies={savedMovies}
-              onDelete={handleDeleteSavedMovie}
+              onDelete={handleDeleteMovie}
               />
             </ProtectedRoute>
           }/>

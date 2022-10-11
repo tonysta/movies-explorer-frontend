@@ -4,7 +4,6 @@ function MoviesCard({type, movie, onLike, onDelete, isLiked}) {
     const url = 'https://api.nomoreparties.co/';
 
     const handleLikeButton = () => {
-        console.log(movie)
         if (isLiked) {
             onDelete(movie);
         } else {
