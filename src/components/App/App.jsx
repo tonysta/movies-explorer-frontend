@@ -87,7 +87,6 @@ function App() {
   }, []);
 
   useEffect(function () {
-    // setSavedMovies(savedMovies);
     setLikedMoviesIds(savedMovies.map((item) => item.movieId));
   }, [savedMovies]);
 
@@ -173,6 +172,7 @@ function App() {
     setName('');
     setCurrentUser({});
     setErrMsg(false);
+    sethasLoaded(false);
   }
 
   useEffect(function () {

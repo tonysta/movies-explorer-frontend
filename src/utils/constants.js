@@ -1,5 +1,5 @@
-// const BASE_URL = 'http://localhost:3000';
-const BASE_URL = 'https://api.movie.nomorepartiesxyz.ru';
+const BASE_URL = 'http://localhost:3000';
+// const BASE_URL = 'https://api.movie.nomorepartiesxyz.ru';
 
 const BREAKPOINT_1280 = 1280;
 const BREAKPOINT_768 = 768;
