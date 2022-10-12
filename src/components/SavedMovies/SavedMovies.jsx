@@ -19,20 +19,21 @@ function SavedMovies({savedMovies, onDelete}) {
 
     const handleSearchSavedMovie = (event) => {
         event.preventDefault();
-        // setName(event.target.value);
-        // setCheckbox(event.target.checked);
-        setFilteredSavedMovies(filterMovies(savedMovies, name, checkbox));
-        setNotFoundSavedMsg(true);
+        if (filterMovies(savedMovies, name, checkbox).length !== 0) {
+            setNotFoundSavedMsg(false);
+            setFilteredSavedMovies(filterMovies(savedMovies, name, checkbox));
+        } else {
+            setNotFoundSavedMsg(true);
+        }
+        
     }
     
     const handleCheckboxChange = (event) => {
         setCheckbox(event.target.checked);
-        setNotFoundSavedMsg(false);
     }
 
     const handleNameChange = (event) => {
         setName(event.target.value);
-        setNotFoundSavedMsg(false);
     }
 
     return (

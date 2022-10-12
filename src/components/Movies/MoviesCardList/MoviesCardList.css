@@ -53,9 +53,9 @@
 }
 
 .movies-list__not-found-saved_type_active {
-    position: relative;
-    top: 0;
-    left: 50%;
+    position: absolute;
+    top: 30%;
+    left: 45%;
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
