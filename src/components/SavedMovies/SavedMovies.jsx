@@ -11,20 +11,28 @@ function SavedMovies({savedMovies, onDelete}) {
 
     const [ name, setName ] = useState('');
     const [ checkbox, setCheckbox ] = useState(false);
+    const [ notFoundSavedMsg, setNotFoundSavedMsg] = useState(false);
+
+    const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
+
+    
 
     const handleSearchSavedMovie = (event) => {
         event.preventDefault();
-        setName(event.target.value);
-        setCheckbox(event.target.checked);
+        // setName(event.target.value);
+        // setCheckbox(event.target.checked);
+        setFilteredSavedMovies(filterMovies(savedMovies, name, checkbox));
+        setNotFoundSavedMsg(true);
     }
     
     const handleCheckboxChange = (event) => {
         setCheckbox(event.target.checked);
+        setNotFoundSavedMsg(false);
     }
 
     const handleNameChange = (event) => {
-        const name = event.target.value;
-        setName(name);
+        setName(event.target.value);
+        setNotFoundSavedMsg(false);
     }
 
     return (
@@ -42,9 +50,13 @@ function SavedMovies({savedMovies, onDelete}) {
                     />
                     <MoviesCardList type="savedMovies">
                         {
-                            filterMovies(savedMovies, name, checkbox).map((movie) => (
-                                <MoviesCard movie={movie} key={movie._id} type='savedMovies' onDelete={onDelete}/>
-                            )) 
+                            notFoundSavedMsg ? 
+                                <h2 className='movies-list__not-found-saved_type_active'>Ничего не найдено.</h2> :
+
+                                (filteredSavedMovies.length !== 0 ? filteredSavedMovies : savedMovies)
+                                .map((movie) => (
+                                    <MoviesCard movie={movie} key={movie._id} type='savedMovies' onDelete={onDelete}/>
+                            ))
                         }
                     </MoviesCardList>
                 </main>

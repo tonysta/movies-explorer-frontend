@@ -87,7 +87,7 @@ function App() {
   }, []);
 
   useEffect(function () {
-    setSavedMovies(savedMovies);
+    // setSavedMovies(savedMovies);
     setLikedMoviesIds(savedMovies.map((item) => item.movieId));
   }, [savedMovies]);
 

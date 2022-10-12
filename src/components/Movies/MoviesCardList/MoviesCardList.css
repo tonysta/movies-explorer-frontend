@@ -52,6 +52,18 @@
     margin: -140px 0 0;
 }
 
+.movies-list__not-found-saved_type_active {
+    position: relative;
+    top: 0;
+    left: 50%;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    color: #000000;
+    text-align: center;
+}
+
 .movies-list__error-msg {
     display: none;
 }
