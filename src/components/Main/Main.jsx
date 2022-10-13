@@ -8,13 +8,14 @@ import Portfolio from './Portfolio/Portfolio';
 import Promo from './Promo/Promo';
 import NavTab from './NavTab/NavTab';
 import Footer from '../Footer/Footer';
+import HeaderMain from '../Header/HeaderMain/HeaderMain';
 
 
-function Main() {
+function Main({ loggedIn }) {
     return (
         <>
             <Header>
-              <HeaderLanding />  
+                {loggedIn? (<HeaderMain/>) : (<HeaderLanding />) }
             </Header>
             <main>
                 <Promo>

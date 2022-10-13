@@ -1,0 +1,12 @@
+.preloader {
+    width: 100%;
+}
+
+.preloader__image {
+    margin: 0 auto;
+    width: 150px;
+    height: 150px;
+    background-image: url('../../images/preloader.gif');
+    background-position: center;
+    background-size: contain;
+}

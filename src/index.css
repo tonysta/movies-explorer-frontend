@@ -42,6 +42,8 @@
 
 @import url(./components/Header/HeaderBurger/HeaderBurger.css);
 
+@import url(./components/Preloader/Preloader.css);
+
 /* * {
     outline: 1px solid green;
 } */

@@ -71,6 +71,19 @@
     transition: opacity 0.3s linear;
 }
 
+.profile__button_type_disabled {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #000000;
+    border: none;
+    padding: 0;
+    margin: 0 auto;
+    background-color: transparent;
+    cursor: default;
+}
+
 .profile__button_type_exit {
     font-style: normal;
     font-weight: 500;
